@@ -21,10 +21,17 @@ app.get("/urls", (req, res) => {
   res.render("urls_index", templateVars);
 });
 
+//urls/new above urls/id
+app.get("/urls/new", (req, res) => {
+  res.render("urls_new");
+});
+
 app.get("/urls/:id", (req, res) => {
-  const templateVars = { id: req.params.id, longURL: /*something */ };
+  const templateVars = { id: req.params.id, longURL: req.body.longURL };
   res.render("urls_show", templateVars);
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
