@@ -39,9 +39,15 @@ app.get("/urls/new", (req, res) => {
 
 app.post("/urls", (req, res) => {
   //put the random string generator in here?
-  //const shorURL = generateRandomString();
+  const shorURL = generateRandomString();
   console.log(req.body); // log post request body to console for now
   res.send("Ok"); // will change later, placeholder
+  urlDatabase[shortURL] = {
+    longURL: req.body.longURL
+  };
+  //use built-in redirect function
+  //substitute :id with shortURL
+  res.redirect(`/urls/${shorURL}`);
 });
 
 app.get("/urls/:id", (req, res) => {
@@ -49,7 +55,10 @@ app.get("/urls/:id", (req, res) => {
   res.render("urls_show", templateVars);
 });
 
-
+app.get("/u/:id", (req, res) => {
+  const longURL = req.body.longURL;
+  res.redirect(longURL);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
