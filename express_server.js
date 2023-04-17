@@ -10,6 +10,17 @@ const urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
+function generateRandomString() {
+  const possibleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomString = '';
+  //for loop? no, would have to be while
+  while (randomString.length < 6) { //add random character to the string
+    randomString += possibleChars[Math.floor(Math.random() * possibleChars.length)];
+  }
+
+  return randomString;
+};
+
 //refactored hello app.get
 app.get("/hello", (req, res) => {
   const templateVars = { greeting: "Hello World" };
@@ -27,6 +38,8 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
+  //put the random string generator in here?
+  //const shorURL = generateRandomString();
   console.log(req.body); // log post request body to console for now
   res.send("Ok"); // will change later, placeholder
 });
