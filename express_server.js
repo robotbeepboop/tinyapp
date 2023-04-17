@@ -9,10 +9,21 @@ const urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
+//refactored hello app.get
 app.get("/hello", (req, res) => {
-  res.send("<html><body>Hello <b>World</b></body></html>\n");
-  //res.json(urlDatabase);
-  //res.send("Hello!");
+  const templateVars = { greeting: "Hello World" };
+  res.render("urls_index", templateVars);
+});
+
+//new app.get for the urls
+app.get("/urls", (req, res) => {
+  const templateVars = { urls: urlDatabase };
+  res.render("urls_index", templateVars);
+});
+
+app.get("/urls/:id", (req, res) => {
+  const templateVars = { id: req.params.id, longURL: /*something */ };
+  res.render("urls_show", templateVars);
 });
 
 app.listen(PORT, () => {
