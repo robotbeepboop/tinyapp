@@ -34,7 +34,14 @@
             <tr>
               <td><%= id %></td>
               <td><%= urls[id] %></td>
-              <td><form method="POST" action="/urls/9sm5xK/delete">...</form></td>
+              <td>
+                <a href="/urls/<%= urls[id] %>">
+                  <button> Edit </button>
+                </a>
+              </td>
+              <td><form method="POST" action="/urls/<%= urls[id] %>/delete">
+                <button type="submit">Delete</button>
+              </form></td>
             </tr>
           <% } %>
         </tbody>
@@ -58,4 +65,3 @@
     ></script>
   </body>
 </html>
-        
