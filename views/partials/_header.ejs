@@ -22,17 +22,9 @@
       <form action="/login" method="post">
         <label form="name"> Logged in as: <%= username %></label>
         <button type="submit"> Logout </button>
-      <% } else if { %>
-        <form action="/login" method="POST">
-          <input type="text" name="username">
-          <button type="submit"> Login </button>
-        <% } else if { %>
-          <form action="/register" method="POST">
-            <label for="email"> Email </label>
-            <input type="text" name="username">
-            <label for="password"> Password </label>
-            <input type="password" name="password">
-            <button type="submit"> Register </button>
+      <% } else { %>
+        <a class="nav-item nav-link" href="/login"> Login </a>
+        <a class="nav-item nav-link" href="/register"> Register </a>
     <% } %>
   </nav>
 </header>
