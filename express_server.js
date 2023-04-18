@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+//cookie parser
+app.use(cookieParser());
 
 const urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
@@ -22,13 +24,24 @@ function generateRandomString() {
   return randomString;
 };
 
-//refactored hello app.get
-app.get("/hello", (req, res) => {
-  const templateVars = { greeting: "Hello World" };
-  res.render("urls_index", templateVars);
+//reorganized the code a bit to make the site not crash
+//login page to start
+app.get("/login", (req, res) => {
+  const templateVars = {
+    user: req.cookies["user_id"]
+  };
+  res.render("urls_login", templateVars);
 });
 
-//url page
+//registration (if not logged in)
+app.get("/register", (req, res) => {
+  const templateVars = {
+    user: req.cookies["user_id"]
+  };
+  res.render("urls_registration", templateVars);
+});
+
+//url home page
 app.get("/urls", (req, res) => {
   const templateVars = { urls: urlDatabase };
   res.render("urls_index", templateVars);
@@ -36,38 +49,37 @@ app.get("/urls", (req, res) => {
 
 //urls/new above urls/id
 app.get("/urls/new", (req, res) => {
+  //const templateVars = { urls: urlDatabase }; not sure if i should add this line or not
   res.render("urls_new");
 });
 
 //redirect
 app.get("/u/:id", (req, res) => {
-  const shortURL = req.body.shorURL;
-  res.redirect(urlDatabase[shortURL].longURL);
+  const longURL = urlDatabase[req.params.shorURL];
+  res.redirect(longURL);
 });
 
+//edit urls page
 app.get("/urls/:id", (req, res) => {
-  const templateVars = { id: req.params.id, longURL: req.body.longURL };
+  const templateVars = { shorURL: req.params.shortURL, longURL: urlDatabase[req.params.shorURL] };
   res.render("urls_show", templateVars);
 });
 
-app.get("/urls", (req, res) => {
+/*app.get("/urls", (req, res) => {
   const templateVars = {
     username: req.cookies["username"]
   };
   res.render("urls_index", templateVars);
-});
+});*/
 
 //new shorturl
 app.post("/urls", (req, res) => {
   //put the random string generator in here?
   const shorURL = generateRandomString();
-  console.log(req.body); // log post request body to console for now
+  const longURL = req.body.longURL;
   res.send("Ok"); // will change later, placeholder
-  urlDatabase[shortURL] = {
-    longURL: req.body.longURL
-  };
+  urlDatabase[shortURL] = longURL;
   //use built-in redirect function
-  //substitute :id with shortURL
   res.redirect(`/urls/${shorURL}`);
 });
 
@@ -85,15 +97,17 @@ app.post("/urls", (req, res) => {
 
 //login
 app.post("/login", (req, res) => {
-  res.cookie('username');
+  const email = req.body.email;
+  const psswd = req.body.password;
+  
+  res.cookie("user_id");
   //redirect after login
   res.redirect(`/urls/`);
 });
 
 //logout
 app.post("/logout", (req, res) => {
-  let cookieInfo = req.body.username;
-  res.cookie('username', cookieInfo);
+  res.clearCookie("user_id");
   res.redirect(`/urls/`);
 });
 
