@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const PORT = 8080; // default port 8080
+var cookieParser = require('cookie-parser');
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -49,6 +50,13 @@ app.get("/urls/:id", (req, res) => {
   res.render("urls_show", templateVars);
 });
 
+app.get("/urls", (req, res) => {
+  const templateVars = {
+    username: req.cookies["username"]
+  };
+  res.render("urls_index", templateVars);
+});
+
 //new shorturl
 app.post("/urls", (req, res) => {
   //put the random string generator in here?
@@ -79,6 +87,13 @@ app.post("/urls", (req, res) => {
 app.post("/login", (req, res) => {
   res.cookie('username');
   //redirect after login
+  res.redirect(`/urls/`);
+});
+
+//logout
+app.post("/logout", (req, res) => {
+  let cookieInfo = req.body.username;
+  res.cookie('username', cookieInfo);
   res.redirect(`/urls/`);
 });
 
