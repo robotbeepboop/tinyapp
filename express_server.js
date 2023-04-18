@@ -37,6 +37,19 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
+app.get("/u/:id", (req, res) => {
+  const longURL = req.body.longURL;
+  /*urlDatabase[shorURL] = {
+    longURL: req.body.longURL
+  }*/
+  res.redirect(longURL);
+});
+
+app.get("/urls/:id", (req, res) => {
+  const templateVars = { id: req.params.id, longURL: req.body.longURL };
+  res.render("urls_show", templateVars);
+});
+
 app.post("/urls", (req, res) => {
   //put the random string generator in here?
   const shorURL = generateRandomString();
@@ -50,18 +63,9 @@ app.post("/urls", (req, res) => {
   res.redirect(`/urls/${shorURL}`);
 });
 
-app.get("/u/:id", (req, res) => {
-  const longURL = req.body.longURL;
-  /*urlDatabase[shorURL] = {
-    longURL: req.body.longURL
-  }*/
-  res.redirect(longURL);
-});
-
-app.get("/urls/:id", (req, res) => {
-  const templateVars = { id: req.params.id, longURL: req.body.longURL };
-  res.render("urls_show", templateVars);
-});
+app.post("/urls", (req, res) => {
+  delete urlDatabase[req.params.shorURL];
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
