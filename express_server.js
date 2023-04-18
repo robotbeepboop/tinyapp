@@ -27,6 +27,7 @@ app.get("/hello", (req, res) => {
   res.render("urls_index", templateVars);
 });
 
+//url page
 app.get("/urls", (req, res) => {
   const templateVars = { urls: urlDatabase };
   res.render("urls_index", templateVars);
@@ -37,12 +38,10 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
+//redirect
 app.get("/u/:id", (req, res) => {
-  const longURL = req.body.longURL;
-  /*urlDatabase[shorURL] = {
-    longURL: req.body.longURL
-  }*/
-  res.redirect(longURL);
+  const shortURL = req.body.shorURL;
+  res.redirect(urlDatabase[shortURL].longURL);
 });
 
 app.get("/urls/:id", (req, res) => {
@@ -66,13 +65,21 @@ app.post("/urls", (req, res) => {
 
 //delete url
 app.post("/urls", (req, res) => {
-  delete urlDatabase[req.params.shorURL];
+  const linkToDelete = req.params.shorURL;
+  delete urlDatabase[linkToDelete];
 });
 
 //edit url
 app.post("/urls", (req, res) => {
   let longURL = req.body.longURL;
   urlDatabase[req.params.id].longURL = longURL;
+});
+
+//login
+app.post("/login", (req, res) => {
+  res.cookie('username');
+  //redirect after login
+  res.redirect(`/urls/`);
 });
 
 app.listen(PORT, () => {
