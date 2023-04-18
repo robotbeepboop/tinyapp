@@ -50,6 +50,7 @@ app.get("/urls/:id", (req, res) => {
   res.render("urls_show", templateVars);
 });
 
+//new shorturl
 app.post("/urls", (req, res) => {
   //put the random string generator in here?
   const shorURL = generateRandomString();
@@ -63,9 +64,16 @@ app.post("/urls", (req, res) => {
   res.redirect(`/urls/${shorURL}`);
 });
 
+//delete url
 app.post("/urls", (req, res) => {
   delete urlDatabase[req.params.shorURL];
-})
+});
+
+//edit url
+app.post("/urls", (req, res) => {
+  let longURL = req.body.longURL;
+  urlDatabase[req.params.id].longURL = longURL;
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
