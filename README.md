@@ -6,9 +6,8 @@ Screenshots of website
 2. Login page
 ![image](https://user-images.githubusercontent.com/127355581/233206373-5245c53a-4e39-4efe-af15-f8c5348ba74e.png)
 
-
 3. Register page
-![image](https://user-images.githubusercontent.com/127355581/233205899-f5398e07-3b2d-4987-884c-096e21921cf0.png)
+![image](https://user-images.githubusercontent.com/127355581/233206604-38c27863-6b5a-44fc-bddb-472d89dd63d5.png)
 
 5. User logged in
 
