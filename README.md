@@ -1,3 +1,7 @@
+Notable bugs:
+- code runs smoothly but does not display current user in header, troubleshooting currently
+- deletion of links doesnt complete correctly, throws an error
+
 Screenshots of website
 
 1. User not logged in
