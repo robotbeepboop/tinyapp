@@ -5,18 +5,19 @@ TinyApp is a full stack web application built with Node and Express that allows 
 ## Final Product
 
 1. User not logged in
-![image](https://user-images.githubusercontent.com/127355581/233163111-83162327-64a8-4d94-aa32-a155f0cee529.png)
+!["Screenshot of url page when user is not logged in"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/urlpagenotloggedin.png)
 
 2. Login page
-![image](https://user-images.githubusercontent.com/127355581/233206373-5245c53a-4e39-4efe-af15-f8c5348ba74e.png)
+!["Screenshot of login page"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/loginpage.png)
 
 3. Register page
-![image](https://user-images.githubusercontent.com/127355581/233206604-38c27863-6b5a-44fc-bddb-472d89dd63d5.png)
+!["Screenshot of registration page"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/registerpage.png)
 
 4. User logged in
+!["Screenshot showing user is logged in"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/userloggedin.png)
 
 5. Create new URL page
-![image](https://user-images.githubusercontent.com/127355581/233178974-13ee29db-b34c-4086-a351-72ca8b0c8fe1.png)
+!["Screenshot of create new url page"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/createnew.png)
 
 ## Dependencies
 
