@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <%- include('partials/_header') %>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -8,24 +14,23 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
-    <title>URL - TinyApp Example</title>
+    <title>TinyApp</title>
   </head>
 
   <body>
-    <%- include('partials/_header') %>
     <div class="card text-center">
       <div class="card-header"></div>
       <div class="card-body">
-        <h5 class="card-title">TinyURL for: <%= longURL %></h5>
+        <h5 class="card-title">TinyURL for: <%= urls[shortURL].longURL %></h5>
         <p class="card-text">
-          Short URL ID: <a href="/u/<%= id %>"><%= id %></a>
+          Short URL ID: <a href="/u/<%= shortURL %>"><%= shortURL %></a>
         </p>
       </div>
       <div class="card-footer text-muted"></div>
+        <h3>Edit</h3>
         <form action="/urls/<%= shortURL %>" method="POST">
-          <h3>Edit</h3>
-          <label form="name"></label>
-          <input type="text" name="updateURL" placeholder="<%=longURL %>">
+          <label for="longURL"> New URL: </label>
+          <input type="text" name="longURL" placeholder="http://">
           <button type="submit">Submit</button>
         </form>
     </div>
