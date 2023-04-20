@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true })); //populates req.body
 app.use(cookieParser());
 //res.cookie('userID', templateVars);
 
-const { generateRandomString, getUserByEmail, urlsForUser } = require('./scriptsToRun');
+const { generateRandomString, getUserByEmail, urlsForUser } = require('./helpers');
 
 const urlDatabase = {
   b6UTxQ: {
