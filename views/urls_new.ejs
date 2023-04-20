@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <%- include('partials/_header') %>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -19,20 +20,12 @@
   </head>
 
   <body>
-    <%- include('partials/_header') %>
-
     <main style="margin: 1em;">
       <h3>Create TinyURL</h3>
       <form class="form-inline" action="/urls" method="POST">
         <div class="form-group mb-2">
           <label for="longURL">Enter a URL:</label>
-          <input
-            class="form-control"
-            type="text"
-            name="longURL"
-            placeholder="http://"
-            style="width: 300px; margin: 1em"
-          />
+          <input class="form-control" type="text" name="longURL" placeholder="http://" style="width: 300px; margin: 1em"/>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
