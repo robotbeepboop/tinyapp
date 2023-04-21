@@ -11,9 +11,12 @@ const generateRandomString = () => {
 };
 
 const getUserByEmail = (emailAddress, database) => {
-  for (let key in database) {
-    if (database[key].email === emailAddress) {
-      return database[key].id;
+  const values = Object.values(database);
+  
+  for (let value of values) {
+    const user = database[value];
+    if (user.email === emailAddress) {
+      return user;
     }
   }
   return undefined;
@@ -21,9 +24,11 @@ const getUserByEmail = (emailAddress, database) => {
 
 const urlsForUser = (id, database) => {
   let userURLS = {}; //empty object to fill in
-  for (let key of Object.keys(database)) {
-    if (database[key].userID === id) {
-      userURLS[key] = database[key];
+  const keys = Object.keys(database)
+  for (let key of keys) {
+    const url = database[key];
+    if (url.userID === id) {
+      userURLS[key] = url;
     }
   }
   return userURLS;
