@@ -31,6 +31,7 @@ app.get("/login", (req, res) => {
   const templateVars = {
     user: users[req.session.user_id]
   };
+  console.log(templateVars);
   res.render('urls_login', templateVars);
 });
 
@@ -42,6 +43,7 @@ app.get("/register", (req, res) => {
   const templateVars = {
     user: users[req.session.user_id]
   };
+  console.log(templateVars);
   res.render("urls_registration", templateVars);
 });
 
@@ -50,6 +52,7 @@ app.get("/urls", (req, res) => {
   const userID = req.session.user_id;
   const userURLS = urlsForUser(userID, urlDatabase);
   const templateVars = { urls: userURLS, user: users[userID]};
+  console.log(templateVars);
   if (userID) {
     res.render('urls_index', templateVars);
   } else {
@@ -60,6 +63,7 @@ app.get("/urls", (req, res) => {
 
 app.get("/urls/new", (req, res) => {
   const templateVars = { user: users[req.session.user_id] };
+  console.log(templateVars);
   if (req.session.user_id) {
     res.render("urls_new", templateVars);
   } else{
@@ -92,6 +96,7 @@ app.get("/urls/:shortURL", (req, res) => {
       shortURL,
       urls: urlDatabase
     }
+    console.log(templateVars);
     urlDatabase[shortURL].longURL = req.body.newURL;
     res.render('/urls/show', templateVars);
   }
