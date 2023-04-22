@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const cookieSession = require('cookie-session');
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true })); //populates req.body
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieSession({ name: 'session', 
 keys: ['gfhvytbgfhgrvytfg'] }));
 
