@@ -14,7 +14,7 @@ TinyApp is a full stack web application built with Node and Express that allows 
 !["Screenshot of registration page"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/registerpage.png)
 
 4. User logged in
-!["Screenshot showing user is logged in"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/image.png)
+!["Screenshot showing user is logged in"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/userloggedin.png)
 
 5. Create new URL page
 !["Screenshot of create new url page"](https://github.com/robotbeepboop/tinyapp/blob/main/docs/createnew.png)
