@@ -61,7 +61,6 @@ app.get('/urls', (req, res) => {
   const userURLS = urlsForUser(userID, urlDatabase);
   const templateVars = { urls: userURLS, user: users[userID] };
   if (userID) {
-    console.log(templateVars);
     res.render('urls_index', templateVars);
   } else {
     return res.status(401).send('Log in to view this page.');
@@ -88,7 +87,6 @@ app.get('/u/:shortURL', (req, res) => {
   }
 });
 
-//revise urls/:shorturl
 app.get('/urls/:shortURL', (req, res) => {
   const userID = req.session.user_id;
   const shortURL = req.params.shortURL;
