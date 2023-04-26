@@ -31,7 +31,7 @@ let users = {
 app.get('/', (req, res) => {
   const userID = req.session.user_id;
   if (userID) {
-    res.redirect('/urls');
+    return res.redirect('/urls');
   }
   res.redirect('/login');
 });
@@ -61,7 +61,7 @@ app.get('/urls', (req, res) => {
   const userURLS = urlsForUser(userID, urlDatabase);
   const templateVars = { urls: userURLS, user: users[userID] };
   if (userID) {
-    res.render('urls_index', templateVars);
+    return res.render('urls_index', templateVars);
   } else {
     return res.status(401).send('Log in to view this page.');
   }
@@ -69,7 +69,7 @@ app.get('/urls', (req, res) => {
 
 app.get('/urls/new', (req, res) => {
   if (!req.session.user_id) {
-    res.redirect('/login');
+    return res.redirect('/login');
   } else {
     const templateVars = { user: users[req.session.user_id] };
     res.render('urls_new', templateVars);
@@ -141,8 +141,8 @@ app.post('/urls/:shortURL', (req, res) => {
   const userURLS = urlsForUser(userID, urlDatabase);
   const shortURL = req.params.shortURL;
   if (Object.keys(userURLS).includes(shortURL)) {//check if the URL is in the database
-    urlDatabase[shortURL].longURL = req.body.newURL;
-    res.redirect('/urls');
+    urlDatabase[shortURL].longURL = req.body.longURL;
+    return res.redirect('/urls');
   }
   return res.status(400).send('Invalid request. Try again.');
 });
