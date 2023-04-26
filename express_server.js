@@ -79,8 +79,7 @@ app.get('/urls/new', (req, res) => {
 app.get('/u/:shortURL', (req, res) => {
   const shortURL = req.params.shortURL;
   const longURL = urlDatabase[shortURL].longURL;
-  const userID = req.session.user_id;
-  if (!urlDatabase[shortURL] || !userID) {
+  if (!urlDatabase[shortURL]) {
     return res.status(404).send('Cannot display page.');
   } else {
     return res.redirect(longURL);
@@ -88,13 +87,20 @@ app.get('/u/:shortURL', (req, res) => {
 });
 
 app.get('/urls/:shortURL', (req, res) => {
-  const userID = req.session.user_id;
+  const user = req.session.user_id;
   const shortURL = req.params.shortURL;
+  const url = urlDatabase[shortURL];
+  if (!req.session.user_id) {
+    return res.status(401).send('Must be logged in to view this page.');
+  }
+  if (url.userID !== req.session.user_id) {
+    return res.status(401).send('Account does not own this URL.');
+  }
   if (urlDatabase[shortURL]) {//check if that particular key exists in the database
     const templateVars = {
       shortURL: shortURL,
       longURL: urlDatabase[shortURL].longURL,
-      user: users[userID],
+      user: users[user],
       urlUserID: urlDatabase[shortURL].userID
     };
     return res.render('urls_show', templateVars);
@@ -170,7 +176,7 @@ app.post('/register', (req, res) => {
     password: bcrypt.hashSync(password, 10)
   };
   req.session.user_id = userID;
-  res.redirect('/login');
+  res.redirect('/urls');
 });
 
 app.post('/logout', (req, res) => {
