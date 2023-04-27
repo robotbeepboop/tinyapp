@@ -9,9 +9,9 @@ const generateRandomString = () => {
 };
 
 const getUserByEmail = (emailAddress, database) => {
-  for (let key in database) {
-    if (database[key]['email'] === emailAddress) {
-      return key;
+  for (let userObj in database) {
+    if (database[userObj]['email'] === emailAddress) {
+      return userObj;
     }
   }
   return undefined;
