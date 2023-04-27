@@ -60,7 +60,7 @@ app.get('/urls', (req, res) => {
   const userID = req.session.user_id;
   const userURLS = urlsForUser(userID, urlDatabase);
   const templateVars = { urls: userURLS, user: users[userID] };
-  if (userID) {
+  if (userID || userID !== getUserByEmail(req.body.email, users)) {
     return res.render('urls_index', templateVars);
   } else {
     return res.status(401).send('Log in to view this page.');
